@@ -3,22 +3,22 @@ package main
 import (
 	"io"
 	"net/http"
-	"os/exec"
-	"log"
+	// "os/exec"
+	// "log"
 )
 
-func reLaunch(){
-	cmd := exec.Command("sh","./deploy.sh")
-	err := cmd.Start()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = cmd.Wait()
-}
+// func reLaunch(){
+// 	cmd := exec.Command("sh","./deploy.sh")
+// 	err := cmd.Start()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	err = cmd.Wait()
+// }
 
 func firstPage(w http.ResponseWriter, r *http.Request){
 	io.WriteString(w,"<h1> Hello, James 0606</h1>")
-	reLaunch()
+	//reLaunch()
 }
 
 func main() {
