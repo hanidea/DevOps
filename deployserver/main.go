@@ -6,7 +6,7 @@ import (
 )
 
 func firstPage(w http.ResponseWriter, r *http.Request){
-	io.WriteString(w,"<h1> Hello, James 5000</h1>")
+	io.WriteString(w,"<h1> Hello, James 5</h1>")
 }
 
 func main() {
