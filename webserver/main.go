@@ -32,6 +32,7 @@ func main() {
 
 //业务逻辑
 func uploadHandler(w http.ResponseWriter, r *http.Request){
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	//限制客户端上传视频文件大小
 	r.Body= http.MaxBytesReader(w, r.Body, 10*1024*1024)
 	err := r.ParseMultipartForm(10*1024*1024)
@@ -71,6 +72,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request){
 
 //获取视频文件列表
 func getFileListHandler(w http.ResponseWriter, r *http.Request){
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	files, _ := filepath.Glob("video/*")
 	var ret []string
 	for _, file :=range files {
