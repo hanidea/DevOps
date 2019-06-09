@@ -11,6 +11,9 @@ func sayHello(w http.ResponseWriter, r *http.Request){
 }
 
 func main() {
+	//1.实现读取文件handler
+	fileHandler := http.FileServer(http.Dir("./video"))
+	http.Handle("/video/",http.StripPrefix("/video/", fileHandler))
 	http.HandleFunc("/sayHello",sayHello)
 	http.ListenAndServe(":8000",nil)
 }
