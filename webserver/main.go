@@ -74,7 +74,7 @@ func getFileListHandler(w http.ResponseWriter, r *http.Request){
 	files, _ := filepath.Glob("video/*")
 	var ret []string
 	for _, file :=range files {
-		ret = append(ret, "http://" + r.Host + filepath.Base(file))
+		ret = append(ret, "http://" + r.Host + "/video/" + filepath.Base(file))
 	}
 	retJson, _ := json.Marshal(ret)
 	w.Write(retJson)
