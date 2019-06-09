@@ -49,7 +49,7 @@
         }
         function getList() {
             $.getJSON(
-            "http://47.102.208.68:8000/api/list",
+            "http://localhost:8000/api/list",
             null,
             function(result){
                 var testDiv = document.getElementById("contentMp4");
@@ -75,7 +75,7 @@
             var forData = new FormData();
             forData.append("uploadFile",file);
             $.ajax({
-                url:"http://47.102.208.68:8000/api/upload",
+                url:"http://localhost:8000/api/upload",
                 type:"post",
                 data:forData,
                 processData:false,
