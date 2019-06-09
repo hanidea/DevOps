@@ -51,7 +51,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request){
 	newFileName := md5Str + ".mp4"
 
 	// 写入文件
-	dst, err := os.Create("./video"+newFileName)
+	dst, err := os.Create("./video/"+newFileName)
 	defer dst.Close()
 	if err != nil {
 		http.Error(w, err.Error(),http.StatusInternalServerError)
