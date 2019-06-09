@@ -1,15 +1,16 @@
 package main
 
 import (
-	"io"
+	//"io"
 	"net/http"
 )
 
-func firstPage(w http.ResponseWriter, r *http.Request){
-	io.WriteString(w,"<h1> Hello, James devops 0609</h1>")
+func sayHello(w http.ResponseWriter, r *http.Request){
+	// io.WriteString(w,"<h1> Hello, James devops 0609</h1>")
+	w.Write([]byte("hello world"))
 }
 
 func main() {
-	http.HandleFunc("/",firstPage)
+	http.HandleFunc("/sayHello",sayHello)
 	http.ListenAndServe(":8000",nil)
 }
