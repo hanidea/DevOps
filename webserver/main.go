@@ -8,6 +8,8 @@ import (
 	"time"
 	"fmt"
 	"os"
+	"path/filepath"
+	"encoding/json"
 )
 
 func sayHello(w http.ResponseWriter, r *http.Request){
@@ -21,12 +23,14 @@ func main() {
 	http.Handle("/video/",http.StripPrefix("/video/", fileHandler))
 	//2. 上传文件handler
 	http.HandleFunc("/api/upload",uploadHandler)
+	//3. 显示list
+	http.HandleFunc("/api/list",getFileListHandler)
 
 	http.HandleFunc("/sayHello",sayHello)
 	http.ListenAndServe(":8000",nil)
 }
 
-//1.业务逻辑
+//业务逻辑
 func uploadHandler(w http.ResponseWriter, r *http.Request){
 	//限制客户端上传视频文件大小
 	r.Body= http.MaxBytesReader(w, r.Body, 10*1024*1024)
@@ -62,5 +66,17 @@ func uploadHandler(w http.ResponseWriter, r *http.Request){
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	return
+}
+
+//获取视频文件列表
+func getFileListHandler(w http.ResponseWriter, r *http.Request){
+	files, _ := filepath.Glob("video/*")
+	var ret []string
+	for _, file :=range files {
+		ret = append(ret, "http://" + r.Host + filepath.Base(file))
+	}
+	retJson, _ := json.Marshal(ret)
+	w.Write(retJson)
 	return
 }
